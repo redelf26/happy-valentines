@@ -275,6 +275,8 @@
         const totalSlides = 5;
         let autoSlideEnabled = true;
         let slideTimeout = null;
+        const SCROLL_DELAY_MS = 100;
+        const AUTO_RESUME_DELAY_MS = 10000; // 10 seconds
 
         function showContent() {
             const contentSection = document.getElementById('contentSection');
@@ -309,12 +311,12 @@
             const offset = -currentSlide * 100;
             carouselSlide.style.marginLeft = offset + '%';
 
-            // Re-enable auto-slide after 10 seconds of inactivity
+            // Re-enable auto-slide after inactivity
             slideTimeout = setTimeout(() => {
                 autoSlideEnabled = true;
                 carouselSlide.classList.remove('manual');
                 carouselSlide.classList.add('auto-slide');
-            }, 10000);
+            }, AUTO_RESUME_DELAY_MS);
         }
     </script>
 
