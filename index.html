@@ -7,50 +7,109 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #ffeaa7 100%);
             margin: 0;
             padding: 0;
             text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .welcome-section {
-            background-color: #fff;
-            padding: 50px 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            margin: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-radius: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .welcome-section h1 {
-            color: #333;
-            margin-bottom: 20px;
+            color: #ff1744;
+            margin-bottom: 30px;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .welcome-section p {
-            color: #666;
-            margin-bottom: 30px;
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         .welcome-button {
-            background-color: #007BFF;
+            background: linear-gradient(45deg, #ff1744, #ff6090);
             color: white;
-            padding: 15px 30px;
+            padding: 18px 40px;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 50px;
+            font-size: 20px;
+            font-weight: bold;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 23, 68, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .welcome-button:hover {
-            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 23, 68, 0.6);
+        }
+
+        .welcome-button:active {
+            transform: translateY(-1px);
+        }
+
+        .content-section {
+            display: none;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .content-section.show {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .carousel-container {
-            width: 80%;
+            width: 100%;
             margin: 0 auto 40px;
             overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: white;
+            padding: 20px;
         }
 
         .carousel-slide {
@@ -63,6 +122,7 @@
             width: 20%; /* 100% / 5 images */
             height: auto;
             object-fit: cover;
+            border-radius: 10px;
         }
 
         @keyframes slide {
@@ -80,22 +140,24 @@
         }
 
         .video-section {
-            background-color: #e9ecef;
+            background-color: rgba(255, 255, 255, 0.95);
             padding: 40px 20px;
-            border-top: 2px solid #dee2e6;
-            border-bottom: 2px solid #dee2e6;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-bottom: 40px;
         }
 
         .video-section h2 {
-            color: #333;
+            color: #ff1744;
             margin-bottom: 25px;
+            font-size: 2em;
         }
 
         .video-container {
             max-width: 800px;
             margin: 0 auto;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            border-radius: 8px;
+            border-radius: 15px;
             overflow: hidden;
         }
 
@@ -108,30 +170,44 @@
 <body>
 
     <div class="welcome-section">
-        <h1>Hello, Jenny!</h1>
-        <p>Welcome to your page. To get started, please press the button below.</p>
-        <button class="welcome-button" onclick="alert('Welcome, Jenny!')">Press This Button</button>
+        <h1>Hi Jenny! 💕</h1>
+        <button class="welcome-button" onclick="showContent()" aria-label="Reveal special content">Click Me</button>
     </div>
 
-    <div class="carousel-container">
-        <div class="carousel-slide">
-            <img src="img1.jpg" alt="Couple on the beach">
-            <img src="img2.jpg" alt="Couple on a bridge">
-            <img src="img3.jpg" alt="Couple selfie">
-            <img src="img4.jpg" alt="Couple in a cave">
-            <img src="img5.jpg" alt="Couple smiling">
+    <div class="content-section" id="contentSection">
+        <div class="carousel-container">
+            <div class="carousel-slide">
+                <img src="img1.jpg" alt="Couple on the beach">
+                <img src="img2.jpg" alt="Couple on a bridge">
+                <img src="img3.jpg" alt="Couple selfie">
+                <img src="img4.jpg" alt="Couple in a cave">
+                <img src="img5.jpg" alt="Couple smiling">
+            </div>
+        </div>
+
+        <div class="video-section">
+            <h2>Our Special Moments 💖</h2>
+            <div class="video-container">
+                <video controls autoplay muted playsinline loop aria-label="Valentine's Day special moments video compilation">
+                    <source src="valentine.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         </div>
     </div>
 
-    <div class="video-section">
-        <h2>Highlighted Video</h2>
-        <div class="video-container">
-            <video controls>
-                <source src="valentine.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-    </div>
+    <script>
+        function showContent() {
+            const contentSection = document.getElementById('contentSection');
+            contentSection.classList.add('show');
+            
+            // Small delay to allow animation to start before scrolling
+            const SCROLL_DELAY_MS = 100;
+            setTimeout(() => {
+                contentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, SCROLL_DELAY_MS);
+        }
+    </script>
 
 </body>
 </html>
