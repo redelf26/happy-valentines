@@ -121,6 +121,9 @@
         .carousel-slide {
             display: flex;
             width: 500%; /* 5 images * 100% */
+        }
+
+        .carousel-slide.manual {
             transition: margin-left 0.5s ease-in-out;
         }
 
@@ -291,6 +294,7 @@
             if (autoSlideEnabled) {
                 autoSlideEnabled = false;
                 carouselSlide.classList.remove('auto-slide');
+                carouselSlide.classList.add('manual');
             }
 
             // Clear any existing timeout
@@ -308,10 +312,8 @@
             // Re-enable auto-slide after 10 seconds of inactivity
             slideTimeout = setTimeout(() => {
                 autoSlideEnabled = true;
+                carouselSlide.classList.remove('manual');
                 carouselSlide.classList.add('auto-slide');
-                // Reset to sync with animation
-                currentSlide = 0;
-                carouselSlide.style.marginLeft = '0%';
             }, 10000);
         }
     </script>
